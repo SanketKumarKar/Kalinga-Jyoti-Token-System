@@ -65,10 +65,12 @@ const Scanner = () => {
 			const qrData = JSON.parse(result.data);
 			const scannedName = qrData.name;
 			const scannedUuid = qrData.uuid;
+			
+
 
 			const { data: ticketData, error } = await supabase
 				.from("tickets")
-				.select("name,reg_no,count")
+				.select("name,uuid")
 				.eq("name", scannedName)
 				.eq("uuid", scannedUuid);
 
@@ -272,7 +274,7 @@ const Scanner = () => {
 													className="border-4 border-green-800 px-4 py-2 text-2xl"
 													colSpan={2}
 												>
-													Count
+													{count}
 												</th>
 											</tr>
 										</thead>

@@ -70,7 +70,7 @@ const Scanner = () => {
 
 			const { data: ticketData, error } = await supabase
 				.from("tickets")
-				.select("name,uuid")
+				.select("name,uuid,reg_no,count")
 				.eq("name", scannedName)
 				.eq("uuid", scannedUuid);
 

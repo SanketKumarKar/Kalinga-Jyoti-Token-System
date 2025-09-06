@@ -2,7 +2,6 @@ import React from 'react'
 
 const supabasestorage = () => {
     // Uncomment the following code to upload the image to Supabase storage
-				/*
 				try {
 					const filename = `${uuid}-ticket.png`; // Use the UUID and a fixed extension
 					const { data, error } = await supabase.storage
@@ -23,7 +22,7 @@ const supabasestorage = () => {
 				} catch (error) {
 					console.error("Error uploading image:", error);
 				}
-				*/
+
   return (
     <div>supabasestorage</div>
   )

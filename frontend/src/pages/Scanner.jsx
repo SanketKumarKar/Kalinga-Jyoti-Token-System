@@ -68,7 +68,7 @@ const Scanner = () => {
 
 			const { data: ticketData, error } = await supabase
 				.from("tickets")
-				.select("name,reg_no,count,uuid")
+				.select("name,reg_no,count")
 				.eq("name", scannedName)
 				.eq("uuid", scannedUuid);
 
@@ -76,13 +76,13 @@ const Scanner = () => {
 				console.error("Error fetching ticket:", error);
 				setTicketVerified(false);
 			} else {
-				if (ticketData && ticketData.length > 0) {
+				if (ticketData.length > 0) {
 					const ticket = ticketData[0];
+					setTicketVerified(true);
 					setName(ticket.name);
 					setUuid(ticket.uuid);
 					setReg_no(ticket.reg_no);
 					setCount(ticket.count + 1);
-					setTicketVerified(true);
 				} else {
 					setTicketVerified(false);
 				}

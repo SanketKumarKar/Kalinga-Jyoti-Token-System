@@ -35,7 +35,7 @@
 
 Welcome to the **Kalinga Jyoti Token System**! This platform is designed to streamline event management with highly interactive, intuitive, and beautifully responsive user interfaces. 
 
-Hosted at [https://kj-ticket.vercel.app/](https://kj-ticket.vercel.app/), this platform offers multi-session token management, reducing user entry waiting time drastically and resolving redundancy issues associated with physical tickets through secure QR-based authentication.
+Hosted at [https://kj-ticket-2.vercel.app/](https://kj-ticket-2.vercel.app/), this platform offers multi-session token management, reducing user entry waiting time drastically and resolving redundancy issues associated with physical tickets through secure QR-based authentication.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

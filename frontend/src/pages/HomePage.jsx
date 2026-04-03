@@ -106,7 +106,7 @@ const HomePage = () => {
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-4 left-0 w-full text-center z-20 pointer-events-none mb-4">
+      <div className="absolute bottom-4 left-0 w-full text-center z-20 pointer-events-none m-4">
         <p className="text-orange-300/60 text-sm tracking-wider font-serif">
           Made by Kalinga Jyoti Tech Team 2025-2026
         </p>

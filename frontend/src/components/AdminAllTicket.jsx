@@ -4,7 +4,6 @@ import Ticket from "./Ticket";
 
 const AdminAllTicket = () => {
 	const [tickets, setTickets] = useState([]);
-	const [showTickets, setShowTickets] = useState(false);
 
 	useEffect(() => {
 		fetchTickets();
@@ -23,30 +22,16 @@ const AdminAllTicket = () => {
 		}
 	};
 
-	const toggleTicketsVisibility = () => {
-		setShowTickets(!showTickets);
-	};
-
 	return (
-		<div id="alltickets">
-			<div className="flex justify-center items-center mb-4 border-t-4 border-gray-300 pt-4">
-				<button
-					onClick={toggleTicketsVisibility}
-					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-				>
-					{showTickets ? "Hide Tickets" : "View Tickets"}
-				</button>
+		<div id="alltickets" className="border-t border-orange-200 mt-8 pt-8 px-4 pb-8">
+			<h2 className="text-2xl font-bold font-serif text-gray-800 text-center mb-6">Generated Tickets Viewer</h2>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{tickets.map((ticket, index) => (
+					<div key={index} className="w-full">
+						<Ticket name={ticket.name} uuid={ticket.uuid} />
+					</div>
+				))}
 			</div>
-
-			{showTickets && (
-				<div className="grid grid-cols-2">
-					{tickets.map((ticket, index) => (
-						<div key={index} className="mb-4 mr-4">
-							<Ticket name={ticket.name} uuid={ticket.uuid} width={1000} />
-						</div>
-					))}
-				</div>
-			)}
 		</div>
 	);
 };

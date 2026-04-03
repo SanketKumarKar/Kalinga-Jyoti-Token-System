@@ -5,7 +5,6 @@ const AdminTicketStatus = () => {
 	const [data, setData] = useState([]);
 	const [totalReceivedFood, setTotalReceivedFood] = useState(0);
 	const [totalTriedAgain, setTotalTriedAgain] = useState(0);
-	const [showStatus, setShowStatus] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -26,65 +25,56 @@ const AdminTicketStatus = () => {
 	}, []);
 
 	return (
-		<div className=" border-t-4 border-gray-300" id="status">
-			<div className="flex justify-center items-center my-8">
-				<button
-					onClick={() => setShowStatus(!showStatus)}
-					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-				>
-					{showStatus ? "Hide Token Status" : "Display Token Status"}
-				</button>
-			</div>
-			{showStatus && (
-				<div className="p-6 bg-white rounded shadow-md">
-					<div className="mb-4 grid grid-cols-2 content-center gap-4">
-						<div className="flex flex-col items-center justify-between p-4 bg-white text-blue-500 rounded-lg shadow-lg shadow-blue-500 ">
-							<div className="text-4xl font-bold">
-								{totalReceivedFood} / {data.length}
-							</div>
-							<div className="text-2xl uppercase font-semibold">
-								Have received food
-							</div>
+		<div className="border-t border-orange-200 mt-4 pt-8 px-4 pb-12" id="status">
+			<h2 className="text-2xl font-bold font-serif text-gray-800 text-center mb-8">Token Scan Analytics</h2>
+			<div className="p-6 bg-white/90 backdrop-blur border border-orange-200 rounded-2xl shadow-xl max-w-6xl mx-auto">
+				<div className="mb-8 grid grid-cols-1 md:grid-cols-2 content-center gap-6">
+					<div className="flex flex-col items-center justify-between p-6 bg-gradient-to-br from-green-50 to-emerald-100 text-green-700 rounded-xl shadow-lg border border-green-200">
+						<div className="text-5xl font-bold mb-2 font-serif text-emerald-800">
+							{totalReceivedFood} <span className="text-2xl text-emerald-600">/ {data.length}</span>
 						</div>
-						<div className="flex flex-col items-center justify-between p-4 bg-white text-orange-500 rounded-lg shadow-lg shadow-orange-500 ">
-							<div className="text-4xl font-bold">
-								{totalTriedAgain} out of {data.length}
-							</div>
-							<div className="text-2xl uppercase font-semibold">
-								Tried to come again
-							</div>
+						<div className="text-lg uppercase tracking-wide font-extrabold text-emerald-700">
+							Successfully Scanned
 						</div>
 					</div>
-					<div className="grid grid-cols-4 gap-4 pt-4">
-						{data.map((item, index) => (
-							<div
-								key={index}
-								className={`p-4 border rounded shadow-md  ${
-									item.count === 0
-										? "shadow-blue-500"
-										: item.count === 1
-										? "shadow-green-500"
-										: "shadow-orange-500"
-								}`}
-							>
-								<p className="font-bold text-lg">Name: {item.name}</p>
-								<p className="text-gray-700 text-lg font-medium">Reg No: {item.reg_no}</p>
-								<p
-									className={`font-semibold text-xl ${
-										item.count === 0
-											? "text-blue-500"
-											: item.count === 1
-											? "text-green-500"
-											: "text-orange-500"
-									}`}
-								>
-									Count: {item.count}
-								</p>
-							</div>
-						))}
+					<div className="flex flex-col items-center justify-between p-6 bg-gradient-to-br from-red-50 to-rose-100 text-red-700 rounded-xl shadow-lg border border-red-200">
+						<div className="text-5xl font-bold mb-2 font-serif text-red-800">
+							{totalTriedAgain} <span className="text-2xl text-red-600">/ {data.length}</span>
+						</div>
+						<div className="text-lg uppercase tracking-wide font-extrabold text-red-700">
+							Duplicate Scans Caught
+						</div>
 					</div>
 				</div>
-			)}
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+					{data.map((item, index) => (
+						<div
+							key={index}
+							className={`p-4 border-l-4 rounded-lg shadow-sm bg-white border border-gray-100 ${
+								item.count === 0
+									? "border-l-blue-500"
+									: item.count === 1
+									? "border-l-green-500"
+									: "border-l-red-500"
+							}`}
+						>
+							<p className="font-bold text-gray-800">{item.name}</p>
+							<p className="text-gray-500 text-sm font-medium mt-1">Reg: {item.reg_no || 'N/A'}</p>
+							<div className="mt-2 text-sm font-bold bg-gray-50 px-2 py-1 rounded inline-block">
+								<span className={`${
+									item.count === 0
+										? "text-blue-600"
+										: item.count === 1
+										? "text-green-600"
+										: "text-red-600"
+								}`}>
+									Scans: {item.count}
+								</span>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
 		</div>
 	);
 };

@@ -1,52 +1,41 @@
 import React, { memo } from "react";
 import { QRCode } from "react-qr-code";
 
-const Ticket = memo(({ name, uuid, width }) => {
-	console.log("Ticket", { name, uuid, width });
+const FALLBACK_BANNER = "/Navy Yellow Retro Night Party Ticket.jpg";
 
-	const minWidth = 30; // Minimum width of the ticket container
-	const maxWidth = 1000; // Maximum width of the ticket container
-	const ticketWidth = Math.max(Math.min(width, maxWidth), minWidth); // Set width within the range
+const Ticket = memo(({ name, uuid, bannerUrl }) => {
+  const banner = bannerUrl || FALLBACK_BANNER;
 
-	const qrCodeSize = ticketWidth / 6; // QR code size is 1/6 of the ticket width
-	const textSize = ticketWidth / 60; // Text size is 1/40 of the ticket width
-
-	return (
-		<div
-			className="relative"
-			style={{
-				backgroundImage: `url('/Navy Yellow Retro Night Party Ticket.jpg')`,
-				backgroundSize: "cover",
-				width: `${ticketWidth}px`, // Set width of ticket container
-				height: `${ticketWidth / 3}px`, // Set height based on width (3:1 ratio)
-				maxWidth: "100%", // Allow ticket to be responsive up to a maximum width
-				margin: "0 auto", // Center ticket on the page
-			}}
-		>
-			<div
-				className="absolute top-0 bottom-0 right-0 p-4 flex flex-col justify-center items-center"
-				style={{ left: `${3*ticketWidth/4 }px` }}
-			>
-				<p
-					className="text-center text-white font-bold "
-					style={{ fontSize: `${textSize}px`, marginBottom: `${textSize}px`}}
-				>
-					{name}
-				</p>
-				<div className=" bg-white p-1">
-					{/* Use calculated QR code size */}
-					<QRCode
-						level="L"
-						style={{ width: qrCodeSize, height: qrCodeSize }}
-						value={JSON.stringify({
-							name: name,
-							uuid: uuid,
-						})}
-					/>
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div
+      className="relative w-full aspect-[3/1] max-w-4xl mx-auto rounded-xl overflow-hidden shadow-md"
+      style={{
+        backgroundImage: `url('${banner}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* QR/Name Container specifically positioned over the black stub */}
+      <div 
+        className="absolute top-0 bottom-0 flex flex-col justify-center items-center"
+        style={{ right: "1.5%", width: "27.5%" }}
+      >
+        <p 
+          className="text-center text-white font-bold drop-shadow-lg mb-1 sm:mb-2 w-full px-1 leading-tight"
+          style={{ fontSize: "clamp(8px, 1.6vw, 22px)", wordWrap: "break-word" }}
+        >
+          {name}
+        </p>
+        <div className="bg-white p-1 md:p-1.5 rounded-lg w-[75%] max-w-[140px] aspect-square flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+          <QRCode
+            level="L"
+            style={{ width: "100%", height: "100%" }}
+            value={JSON.stringify({ name, uuid })}
+          />
+        </div>
+      </div>
+    </div>
+  );
 });
 
 export default Ticket;

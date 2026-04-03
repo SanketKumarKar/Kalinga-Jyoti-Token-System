@@ -144,7 +144,7 @@ const Scanner = () => {
 			const { error: updateError } = await supabase
 				.from("tickets")
 				.update({ count: count })
-				.match({ name });
+				.match({ uuid });
 
 			if (updateError) {
 				console.error("Error updating ticket:", updateError);
